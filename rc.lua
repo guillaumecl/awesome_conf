@@ -33,7 +33,7 @@ end
 -- }}}
 
 function hostname()
-   local f = io.popen ("/bin/hostname")
+   local f = io.popen ("/bin/hostname -f")
    local n = f:read("*a") or "none"
    f:close()
    n=string.gsub(n, "\n$", "")
