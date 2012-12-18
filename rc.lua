@@ -32,6 +32,15 @@ do
 end
 -- }}}
 
+function hostname()
+   local f = io.popen ("/bin/hostname")
+   local n = f:read("*a") or "none"
+   f:close()
+   n=string.gsub(n, "\n$", "")
+   return(n)
+end
+
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
@@ -47,6 +56,16 @@ editor_cmd = "emacs"
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
+
+customtags = false
+custommenu = false
+tags = {}
+rules = awful.util.table.join()
+globalkeys = awful.util.table.join()
+clientkeys = awful.util.table.join()
+mainmenu = {}
+
+
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
@@ -66,32 +85,40 @@ layouts =
 }
 -- }}}
 
--- {{{ Tags
--- Define a tag table which hold all screen tags.
-tags = {}
-for s = 1, screen.count() do
-   -- Each screen has its own tag table.
-   tags[s] = awful.tag({ "➊", "➋", "➌", "➍"}, s, layouts[1])
--- ➎➏➐➑➒➓
+
+require(hostname())
+
+if not customtags then
+   -- {{{ Tags
+   -- Define a tag table which hold all screen tags.
+   for s = 1, screen.count() do
+      -- Each screen has its own tag table.
+      tags[s] = awful.tag({ "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒"}, s, layouts[1])
+      --
+      -- "➓"
+   end
+   -- }}}
 end
--- }}}
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
-myawesomemenu = {
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", awesome.quit }
-}
+if not custommenu then
+   submenu = {
+      { "manual", terminal .. " -e man awesome" },
+      { "edit config", editor_cmd .. " " .. awesome.conffile },
+      { "restart", awesome.restart },
+      { "quit", awesome.quit }
+   }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                 }
-                       })
 
-mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
-                                     menu = mymainmenu })
+   mainmenu = awful.menu({ items = { { "awesome", submenu, beautiful.awesome_icon },
+                                     { "open terminal", terminal }
+                                  }
+                        })
+end
+
+launcher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
+                                   menu = mainmenu })
 -- }}}
 
 -- {{{ Wibox
@@ -170,7 +197,7 @@ for s = 1, screen.count() do
    -- Add widgets to the wibox - order matters
    mywibox[s].widgets = {
       {
-         mylauncher,
+         launcher,
          mytaglist[s],
          mypromptbox[s],
          layout = awful.widget.layout.horizontal.leftright
@@ -227,9 +254,6 @@ globalkeys = awful.util.table.join(
 
    -- Standard program
    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal .. " -e bash -c 'cd; bash'") end),
-   awful.key({ modkey,           }, "F12", function () awful.util.spawn(terminal .. " -e bash -c 'cd /home/gclement/src/tetrane/reven ; bash'") end),
-   awful.key({ modkey,           }, "F11", function () awful.util.spawn(terminal .. " -e bash -c 'cd /tmp/builds/reven/debug/ ; bash'") end),
-   awful.key({ modkey,           }, "F10", function () awful.util.spawn(terminal .. " -e bash -c 'cd /tmp/builds/dedal/debug/ ; bash'") end),
    awful.key({ modkey, "Control" }, "r", awesome.restart),
    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -254,14 +278,17 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "Right",function () awful.util.spawn( "mpc next" ) end),
    awful.key({ modkey, "Shift"   }, "Left",function () awful.util.spawn( "mpc prev" ) end),
    awful.key({ modkey, "Shift"   }, "Return",function () awful.util.spawn( "mpc toggle" ) end),
---   awful.key({ modkey, "Shift"   }, "Backspace",function () awful.util.spawn( "mpc stop" ) end),
---   awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q sset Master 2dB-") end),
---   awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q sset Master 2dB+") end),
+   --   awful.key({ modkey, "Shift"   }, "Backspace",function () awful.util.spawn( "mpc stop" ) end),
+   --   awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q sset Master 2dB-") end),
+   --   awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q sset Master 2dB+") end),
 
    awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
    -- Prompt
-   awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+   awful.key({ modkey },            "r",     function ()
+												mywibox[mouse.screen].visible = true
+                                                mypromptbox[mouse.screen]:run()
+                                             end),
 
    awful.key({ modkey }, "x",
              function ()
@@ -272,7 +299,12 @@ globalkeys = awful.util.table.join(
              end),
    awful.key({ modkey }, "b", function ()
                                  mywibox[mouse.screen].visible = not mywibox[mouse.screen].visible
-                              end)
+                              end),
+
+
+   awful.key({ "Mod1" ,           }, "F1", function () awful.util.spawn("plasmoidviewer launcher") end),
+   awful.key({ "Mod1"             }, "F3", function () awful.util.spawn("plasmoidviewer calendar") end),
+   globalkeys
 )
 
 clientkeys = awful.util.table.join(
@@ -294,8 +326,7 @@ clientkeys = awful.util.table.join(
                 c.maximized_horizontal = not c.maximized_horizontal
                 c.maximized_vertical   = not c.maximized_vertical
              end),
-   awful.key({ "Mod1"             }, "F1", function () awful.util.spawn("plasmoidviewer launcher") end),
-   awful.key({ "Mod1"             }, "F3", function () awful.util.spawn("plasmoidviewer calendar") end)
+   clientkeys
 )
 
 -- Compute the maximum number of digit we need, limited to 9
@@ -337,13 +368,14 @@ for i = 1, keynumber do
                                                 end))
 end
 
+-- Set keys
+root.keys(globalkeys)
+
 clientbuttons = awful.util.table.join(
    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
    awful.button({ modkey }, 1, awful.mouse.client.move),
    awful.button({ modkey }, 3, awful.mouse.client.resize))
 
--- Set keys
-root.keys(globalkeys)
 -- }}}
 
 -- {{{ Rules
@@ -374,21 +406,16 @@ awful.rules.rules = {
      properties = { tag = tags[1][2] } },
    { rule = { class = "amarok" },
      properties = { tag = tags[1][2] } },
-   { rule = { instance = "emacs" },
-     properties = { tag = tags[1][1] } },
-   { rule = { instance = "emacs_right" },
-     properties = { tag = tags[2][1] } },
    { rule = { class = "Plasmoidviewer" },
 	 properties = {
 		floating = true,
 		keys = awful.util.table.join(clientkeys,
-									 awful.key({ }, "Escape", function (c) c:kill()                         end)
-							)
-  } }
-
-   -- Set Firefox to always map on tags number 2 of screen 1.
-   -- { rule = { class = "Firefox" },
-   --   properties = { tag = tags[1][2] } },
+									 awful.key({ }, "Escape", function (c)
+                                                                 c:kill()
+                                                              end))
+     }
+  },
+   rules
 }
 -- }}}
 
