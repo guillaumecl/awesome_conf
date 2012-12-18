@@ -396,7 +396,7 @@ awful.rules.rules = {
      properties = { floating = true } },
    { rule = { class = "Kcalc" },
      properties = { floating = true } },
-   { rule = { class = "plasma-desktop" },
+   { rule = { instance = "plasma-desktop" },
      properties = { floating = true } },
    { rule = { class = "pinentry" },
      properties = { floating = true } },
