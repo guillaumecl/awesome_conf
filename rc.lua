@@ -380,7 +380,7 @@ clientbuttons = awful.util.table.join(
 -- }}}
 
 -- {{{ Rules
-awful.rules.rules = {
+baserules = {
    -- All clients will match this rule.
    { rule = { },
      properties = { border_width = beautiful.border_width,
@@ -415,9 +415,14 @@ awful.rules.rules = {
                                                                  c:kill()
                                                               end))
      }
-  },
-   rules
+  }
 }
+
+awful.rules.rules = awful.util.table.join(
+   baserules,
+   rules
+)
+
 -- }}}
 
 -- {{{ Signals
