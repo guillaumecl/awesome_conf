@@ -283,6 +283,11 @@ globalkeys = awful.util.table.join(
    --   awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q sset Master 2dB-") end),
    --   awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q sset Master 2dB+") end),
 
+
+   awful.key({ }, "XF86Calculator",function () awful.util.spawn( "kcalc" ) end),
+   awful.key({ }, "XF86Mail",function () awful.util.spawn( "kmail" ) end),
+   awful.key({ }, "XF86HomePage",function () awful.util.spawn( "x-www-browser" ) end),
+
    awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
    -- Prompt
