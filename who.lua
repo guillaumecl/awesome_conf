@@ -14,8 +14,8 @@ customtags = true
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey,           }, "F12", function () awful.util.spawn(terminal .. " -e bash -c 'cd /home/gclement/src/tetrane/reven ; bash'") end),
-   awful.key({ modkey,           }, "F11", function () awful.util.spawn(terminal .. " -e bash -c 'cd /tmp/builds/reven/debug/ ; bash'") end),
-   awful.key({ modkey,           }, "F10", function () awful.util.spawn(terminal .. " -e bash -c 'cd /tmp/builds/dedal/debug/ ; bash'") end)
+   awful.key({ modkey,           }, "F11", function () awful.util.spawn(terminal .. " -e bash -c 'cd /tmp/builds/reven/release/ ; bash'") end),
+   awful.key({ modkey,           }, "F10", function () awful.util.spawn(terminal .. " -e bash -c 'cd /tmp/builds/dedal/release/ ; bash'") end)
 )
 
 rules = {
