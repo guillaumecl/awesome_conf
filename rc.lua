@@ -48,8 +48,8 @@ beautiful.init(base .. "/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvtc"
-editor = os.getenv("EDITOR") or "emacs"
-editor_cmd = "emacs"
+editor = os.getenv("VISUAL") or "emacsclient -c -a ''"
+editor_cmd = "emacsclient -c -a ''"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -275,6 +275,7 @@ globalkeys = awful.util.table.join(
    awful.key({ }, "XF86AudioPrev",function () awful.util.spawn( "mpc prev" ) end),
    awful.key({ }, "XF86AudioPlay",function () awful.util.spawn( "mpc toggle" ) end),
    awful.key({ }, "XF86AudioStop",function () awful.util.spawn( "mpc stop" ) end),
+   awful.key({ modkey            }, "e",function () awful.util.spawn( editor_cmd ) end),
 
    awful.key({ modkey, "Shift"   }, "Right",function () awful.util.spawn( "mpc next" ) end),
    awful.key({ modkey, "Shift"   }, "Left",function () awful.util.spawn( "mpc prev" ) end),
