@@ -19,16 +19,16 @@ end
 -- Handle runtime errors after startup
 do
    local in_error = false
-   awesome.add_signal("debug::error", function (err)
-                                         -- Make sure we don't go into an endless error loop
-                                         if in_error then return end
-                                         in_error = true
-
-                                         naughty.notify({ preset = naughty.config.presets.critical,
-                                                          title = "Oops, an error happened!",
-                                                          text = err })
-                                         in_error = false
-                                      end)
+--   awesome.add_signal("debug::error", function (err)
+--                                         -- Make sure we don't go into an endless error loop
+--                                         if in_error then return end
+--                                         in_error = true
+--
+--                                         naughty.notify({ preset = naughty.config.presets.critical,
+--                                                          title = "Oops, an error happened!",
+--                                                          text = err })
+--                                         in_error = false
+--                                      end)
 end
 -- }}}
 
@@ -267,9 +267,9 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
-   awful.key({ modkey,           }, "F1", function () awful.util.spawn("setxkbmap fr") end),
-   awful.key({ modkey,           }, "F2", function () awful.util.spawn("setxkbmap fr bepo") end),
-   awful.key({ modkey,           }, "F3", function () awful.util.spawn("setxkbmap us") end),
+   awful.key({ modkey,           }, "F1", function () awful.util.spawn(base .. "/changeInput.sh fr") end),
+   awful.key({ modkey,           }, "F2", function () awful.util.spawn(base .. "/changeInput.sh fr bepo") end),
+   awful.key({ modkey,           }, "F3", function () awful.util.spawn(base .. "/changeInput.sh us") end),
 
    awful.key({ }, "XF86AudioNext",function () awful.util.spawn( "mpc next" ) end),
    awful.key({ }, "XF86AudioPrev",function () awful.util.spawn( "mpc prev" ) end),
@@ -421,7 +421,7 @@ baserules = {
                                                                  c:kill()
                                                               end))
      }
-  }
+   },
 }
 
 awful.rules.rules = awful.util.table.join(
@@ -438,12 +438,12 @@ client.add_signal("manage", function (c, startup)
                                -- awful.titlebar.add(c, { modkey = modkey })
 
                                -- Enable sloppy focus
-                               c:add_signal("mouse::enter", function(c)
-                                                               if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-                                                               and awful.client.focus.filter(c) then
-                                                               client.focus = c
-                                                            end
-                                                         end)
+--                               c:add_signal("mouse::enter", function(c)
+--                                                               if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
+--                                                               and awful.client.focus.filter(c) then
+--                                                               client.focus = c
+--                                                            end
+--                                                         end)
 
                                if not startup then
                                   -- Set the windows at the slave,

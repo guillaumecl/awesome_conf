@@ -1,3 +1,4 @@
+
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {}
@@ -6,6 +7,10 @@ for s = 1, screen.count() do
    tags[s] = awful.tag({ "➊", "➋", "➌", "➍"}, s, awful.layout.suit.tile)
    --
 end
+
+awful.layout.set(awful.layout.suit.tile.bottom, tags[2][2])
+awful.tag.setnmaster(2, tags[2][2])
+awful.tag.setmwfact(0.85, tags[2][2])
 
 customtags = true
 
@@ -22,5 +27,24 @@ rules = {
    { rule = { instance = "emacs" },
      properties = { tag = tags[1][1] } },
    { rule = { instance = "emacs_right" },
-     properties = { tag = tags[2][1] } }
+     properties = { tag = tags[2][1] } },
+   { rule = { class = "URxvt" },
+     except = { name = "reven" },
+     callback = awful.client.setslave ,
+     properties = { border_width = 0 },
+   },
+   { rule = { class = "URxvt",  name = "reven" },
+     callback = function(c)
+                   cur = awful.client.getmaster(2)
+                   awful.client.setmaster(c)
+                   awful.client.setmaster(cur)
+                end,
+     properties = { border_width = 0 },
+   },
+   { rule = { class = "Xdot" },
+     callback =  function(c)
+                   cur = awful.client.getmaster(2)
+                   awful.client.setmaster(c)
+                   awful.client.setmaster(cur)
+                end },
 }
