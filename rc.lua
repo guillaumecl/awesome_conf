@@ -276,6 +276,7 @@ globalkeys = awful.util.table.join(
    awful.key({ }, "XF86AudioPlay",function () awful.util.spawn( "mpc toggle" ) end),
    awful.key({ }, "XF86AudioStop",function () awful.util.spawn( "mpc stop" ) end),
    awful.key({ modkey            }, "e",function () awful.util.spawn( editor_cmd ) end),
+   awful.key({ modkey            }, "d",function () awful.util.spawn( "dolphin" ) end),
 
    awful.key({ modkey, "Shift"   }, "Right",function () awful.util.spawn( "mpc next" ) end),
    awful.key({ modkey, "Shift"   }, "Left",function () awful.util.spawn( "mpc prev" ) end),
