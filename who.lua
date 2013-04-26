@@ -2,11 +2,9 @@
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {}
-for s = 1, screen.count() do
-   -- Each screen has its own tag table.
-   tags[s] = awful.tag({ "➊", "➋", "➌", "➍"}, s, awful.layout.suit.tile)
-   --
-end
+
+tags[1] = awful.tag({ "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒"}, 1, awful.layout.suit.tile)
+tags[2] = awful.tag({ "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒"}, 2, awful.layout.suit.tile)
 
 awful.layout.set(awful.layout.suit.tile.bottom, tags[2][2])
 awful.tag.setnmaster(2, tags[2][2])
@@ -20,7 +18,8 @@ globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey,           }, "F12", function () awful.util.spawn(terminal .. " -e bash -c 'cd /home/gclement/src/tetrane/reven ; bash'") end),
    awful.key({ modkey,           }, "F11", function () awful.util.spawn(terminal .. " -e bash -c 'cd /tmp/builds/reven/release/ ; bash'") end),
-   awful.key({ modkey,           }, "F10", function () awful.util.spawn(terminal .. " -e bash -c 'cd /tmp/builds/dedal/release/ ; bash'") end)
+   awful.key({ modkey,           }, "F10", function () awful.util.spawn(terminal .. " -e bash -c 'cd /tmp/builds/dedal/release/ ; bash'") end),
+   awful.key({ "Control", "Mod1" }, "l", function () awful.util.spawn("plasma-overlay") end)
 )
 
 rules = {
