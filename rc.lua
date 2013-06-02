@@ -282,8 +282,8 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "Left",function () awful.util.spawn( "mpc prev" ) end),
    awful.key({ modkey, "Shift"   }, "Return",function () awful.util.spawn( "mpc toggle" ) end),
    --   awful.key({ modkey, "Shift"   }, "Backspace",function () awful.util.spawn( "mpc stop" ) end),
-   --   awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q sset Master 2dB-") end),
-   --   awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q sset Master 2dB+") end),
+   awful.key({ modkey, "Shift"   }, "Down", function () awful.util.spawn("amixer -q sset Master 2dB-") end),
+   awful.key({ modkey, "Shift"   }, "Up", function () awful.util.spawn("amixer -q sset Master 2dB+") end),
 
 
    awful.key({ }, "XF86Calculator",function () awful.util.spawn( "kcalc" ) end),
