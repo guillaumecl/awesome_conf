@@ -277,13 +277,14 @@ globalkeys = awful.util.table.join(
    awful.key({ }, "XF86AudioStop",function () awful.util.spawn( "mpc stop" ) end),
    awful.key({ modkey            }, "e",function () awful.util.spawn( editor_cmd ) end),
    awful.key({ modkey            }, "d",function () awful.util.spawn( "dolphin" ) end),
+   awful.key({ modkey            }, "f",function () awful.util.spawn( "firefox" ) end),
 
    awful.key({ modkey, "Shift"   }, "Right",function () awful.util.spawn( "mpc next" ) end),
    awful.key({ modkey, "Shift"   }, "Left",function () awful.util.spawn( "mpc prev" ) end),
    awful.key({ modkey, "Shift"   }, "Return",function () awful.util.spawn( "mpc toggle" ) end),
    --   awful.key({ modkey, "Shift"   }, "Backspace",function () awful.util.spawn( "mpc stop" ) end),
-   --   awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q sset Master 2dB-") end),
-   --   awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q sset Master 2dB+") end),
+   awful.key({ modkey, "Shift"   }, "Down", function () awful.util.spawn("amixer -q sset Master 2dB-") end),
+   awful.key({ modkey, "Shift"   }, "Up", function () awful.util.spawn("amixer -q sset Master 2dB+") end),
 
 
    awful.key({ }, "XF86Calculator",function () awful.util.spawn( "kcalc" ) end),
