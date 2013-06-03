@@ -18,8 +18,18 @@ globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey,           }, "F12", function () awful.util.spawn(terminal .. " -e bash -c 'cd /home/gclement/src/tetrane/reven ; bash'") end),
    awful.key({ modkey,           }, "F11", function () awful.util.spawn(terminal .. " -e bash -c 'cd /tmp/builds/reven/release/ ; bash'") end),
-   awful.key({ modkey,           }, "F10", function () awful.util.spawn(terminal .. " -e bash -c 'cd /tmp/builds/dedal/release/ ; bash'") end),
-   awful.key({ "Control", "Mod1" }, "l", function () awful.util.spawn("plasma-overlay") end)
+   awful.key({ modkey,           }, "F10", function () awful.util.spawn(terminal .. " -e bash -c 'cd /tmp/builds/reven/debug/ ; bash'") end),
+   awful.key({ "Control", "Mod1" }, "l", function () awful.util.spawn("xscreensaver-command -lock") end),
+   awful.key({ }, "XF86AudioLowerVolume", function ()
+											 awful.util.spawn("amixer -q sset Master 2-")
+										  end),
+   awful.key({ }, "XF86AudioRaiseVolume", function ()
+											 awful.util.spawn("amixer -q sset Master 2+")
+										  end),
+   awful.key({ }, "XF86AudioMute", function ()
+											 awful.util.spawn("amixer -q sset Master toggle")
+										  end),
+   awful.key({ modkey,           }, "p", function () awful.util.spawn("bash -c 'cd /tmp/builds/reven/release/python/ ; ipython qtconsole --colors=linux --autoindent --ConsoleWidget.font_family=\"Terminus\" --ConsoleWidget.font_size=11'") end)
 )
 
 rules = {
