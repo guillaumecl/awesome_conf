@@ -10,7 +10,13 @@ globalkeys = awful.util.table.join(
 											 awful.util.spawn("amixer -M -c 0 -q sset Master 2+")
 										  end),
    awful.key({ }, "XF86AudioMute", function ()
-											 awful.util.spawn("amixer -M -c 1 -q sset PCM toggle")
-											 awful.util.spawn("amixer -M -c 0 -q sset Master toggle")
-										  end)
+									  awful.util.spawn("amixer -M -c 1 -q sset PCM toggle")
+									  awful.util.spawn("amixer -M -c 0 -q sset Master toggle")
+								   end),
+   awful.key({ modkey,      }, "y", function ()
+								 awful.util.spawn("/home/tortuxm/projets/tmpc/build/tmpc")
+							  end),
+   awful.key({ modkey,      }, "c", function ()
+								 awful.util.spawn("/home/tortuxm/projets/tmpc/build/tmpc --current")
+							  end)
 )
