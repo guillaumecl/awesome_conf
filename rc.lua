@@ -312,8 +312,6 @@ globalkeys = awful.util.table.join(
                               end),
 
 
-   awful.key({ "Mod1" ,           }, "F1", function () awful.util.spawn("plasmoidviewer launcher") end),
-   awful.key({ "Mod1"             }, "F3", function () awful.util.spawn("plasmoidviewer calendar") end),
    globalkeys
 )
 
