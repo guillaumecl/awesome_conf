@@ -272,9 +272,9 @@ globalkeys = awful.util.table.join(
 
    awful.key({ }, "XF86AudioNext",function () awful.util.spawn( "mpc next" ) end),
    awful.key({ }, "XF86AudioPrev",function () awful.util.spawn( "mpc prev" ) end),
-   awful.key({ }, "XF86AudioNext",function () awful.util.spawn( "mpc next" ) end),
    awful.key({ "Shift" }, "XF86AudioPrev",function () awful.util.spawn( "mpc seek -00:00:05" ) end),
    awful.key({ "Shift" }, "XF86AudioNext",function () awful.util.spawn( "mpc seek +00:00:05" ) end),
+   awful.key({ }, "XF86AudioPlay",function () awful.util.spawn( "mpc toggle" ) end),
    awful.key({ }, "XF86AudioStop",function () awful.util.spawn( "mpc stop" ) end),
    awful.key({ modkey            }, "e",function () awful.util.spawn( editor_cmd ) end),
    awful.key({ modkey            }, "d",function () awful.util.spawn( "dolphin" ) end),
