@@ -51,6 +51,8 @@ terminal = "urxvtc"
 editor = os.getenv("VISUAL") or "emacsclient -c -a ''"
 editor_cmd = "emacsclient -c -a ''"
 
+browser = "firefox"
+
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -278,7 +280,7 @@ globalkeys = awful.util.table.join(
    awful.key({ }, "XF86AudioStop",function () awful.util.spawn( "mpc stop" ) end),
    awful.key({ modkey            }, "e",function () awful.util.spawn( editor_cmd ) end),
    awful.key({ modkey            }, "d",function () awful.util.spawn( "dolphin" ) end),
-   awful.key({ modkey            }, "w",function () awful.util.spawn( "firefox" ) end),
+   awful.key({ modkey            }, "w",function () awful.util.spawn( browser ) end),
 
    awful.key({ modkey, "Shift"   }, "Right",function () awful.util.spawn( "mpc next" ) end),
    awful.key({ modkey, "Shift"   }, "Left",function () awful.util.spawn( "mpc prev" ) end),
@@ -414,6 +416,8 @@ baserules = {
      properties = { tag = tags[1][2] } },
    { rule = { class = "amarok" },
      properties = { tag = tags[1][2] } },
+   { rule = { class = "Tmpc" },
+     properties = { floating = true } },
    { rule = { class = "Plasmoidviewer" },
 	 properties = {
 		floating = true,
