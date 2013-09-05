@@ -31,14 +31,18 @@ globalkeys = awful.util.table.join(
 										  end),
    awful.key({ modkey,           }, "p", function () awful.util.spawn("bash -c 'cd /tmp/builds/reven/release/python/ ; ipython qtconsole --colors=linux --autoindent --ConsoleWidget.font_family=\"Terminus\" --ConsoleWidget.font_size=11'") end),
    awful.key({ modkey,           }, "y", function () awful.util.spawn("/home/gclement/src/tmpc/build/tmpc") end),
-   awful.key({ modkey,           }, "c", function () awful.util.spawn("/home/gclement/src/tmpc/build/tmpc --current") end)
+   awful.key({ modkey,           }, "c", function () awful.util.spawn("/home/gclement/src/tmpc/build/tmpc --current") end),
+   awful.key({ modkey,           }, "q", function () awful.util.spawn("/tmp/builds/reven/release/output/qtClient3d/qtClient3d") end),
+   awful.key({               }, "Print", function () awful.util.spawn("ksnapshot") end)
 )
 
 rules = {
-   { rule = { instance = "emacs" },
-     properties = { tag = tags[1][1] } },
+   -- { rule = { instance = "emacs" },
+   --   properties = { tag = tags[1][1] } },
    { rule = { instance = "emacs_right" },
      properties = { tag = tags[2][1] } },
+--   { rule = { class = "QtClient3d" },
+--     properties = { tag = tags[2][1] } },
    { rule = { class = "URxvt" },
      except = { name = "reven" },
      callback = awful.client.setslave ,
