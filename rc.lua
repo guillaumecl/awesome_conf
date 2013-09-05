@@ -460,6 +460,20 @@ client.add_signal("manage", function (c, startup)
                                      awful.placement.no_overlap(c)
                                      awful.placement.no_offscreen(c)
                                   end
+
+				-- put this in your "manage" signal handler
+				c:add_signal("property::urgent", function(c)
+				    if c.urgent then
+				        -- Change the border color of the urgent window.
+				        -- You'll need to define the color in your theme.lua, e.g.
+				        -- theme.border_urgent = "#FF3737CC"
+				        -- or you set the color directly to c.border_color 
+				        c.border_color = beautiful.border_urgent
+				 
+				        -- Show a popup notification with the window title
+				        naughty.notify({text="Urgent: " .. c.name})
+				    end
+				end)
                                end
                             end)
 
