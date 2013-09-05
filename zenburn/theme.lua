@@ -12,7 +12,7 @@ base = awful.util.getdir("config")
 
 -- {{{ Main
 theme = {}
-theme.wallpaper_cmd = { "awsetbg -c " .. base .. "/zenburn/fall_right.jpg" }
+theme.wallpaper_cmd = { base .. "/zenburn/random_wallpaper " .. base .. "/zenburn", "", ""}
 -- }}}
 
 -- {{{ Styles
