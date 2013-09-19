@@ -7,6 +7,8 @@ require("beautiful")
 -- Notification library
 require("naughty")
 
+emacsclient = nil
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -31,6 +33,60 @@ do
                                       end)
 end
 -- }}}
+
+--- Spawns cmd if no client can be found matching properties
+-- If such a client can be found, pop to first tag where it is visible, and give it focus
+-- @param cmd the command to execute
+-- @param properties a table of properties to match against clients.  Possible entries: any properties of the client object
+function run_or_raise(cmd, properties)
+   local clients = client.get()
+   local focused = awful.client.next(0)
+   local findex = 0
+   local matched_clients = {}
+   local n = 0
+   for i, c in pairs(clients) do
+      --make an array of matched clients
+      if match(properties, c) then
+         n = n + 1
+         matched_clients[n] = c
+         if c == focused then
+            findex = n
+         end
+      end
+   end
+   if n > 0 then
+      local c = matched_clients[1]
+      -- if the focused window matched switch focus to next in list
+      if 0 < findex and findex < n then
+         c = matched_clients[findex+1]
+      end
+      local ctags = c:tags()
+      if #ctags == 0 then
+         -- ctags is empty, show client on current tag
+         local curtag = awful.tag.selected()
+         awful.client.movetotag(curtag, c)
+      else
+         -- Otherwise, pop to first tag client is visible on
+         awful.tag.viewonly(ctags[1])
+      end
+      -- And then focus the client
+      client.focus = c
+      c:raise()
+      return
+   end
+   awful.util.spawn(cmd)
+end
+
+-- Returns true if all pairs in table1 are present in table2
+function match (table1, table2)
+   for k, v in pairs(table1) do
+      if table2[k] ~= v and not table2[k]:find(v) then
+         return false
+      end
+   end
+   return true
+end
+
 
 function hostname()
    local f = io.popen ("/bin/hostname")
@@ -278,7 +334,9 @@ globalkeys = awful.util.table.join(
    awful.key({ "Shift" }, "XF86AudioNext",function () awful.util.spawn( "mpc seek +00:00:05" ) end),
    awful.key({ }, "XF86AudioPlay",function () awful.util.spawn( "mpc toggle" ) end),
    awful.key({ }, "XF86AudioStop",function () awful.util.spawn( "mpc stop" ) end),
-   awful.key({ modkey            }, "e",function () awful.util.spawn( editor_cmd ) end),
+   awful.key({ modkey            }, "e",function ()
+                                           run_or_raise(editor_cmd, { instance = "emacs" } )
+                                        end),
    awful.key({ modkey            }, "d",function () awful.util.spawn( "dolphin" ) end),
    awful.key({ modkey            }, "w",function () awful.util.spawn( browser ) end),
 
@@ -449,6 +507,10 @@ client.add_signal("manage", function (c, startup)
 --                                                               client.focus = c
 --                                                            end
 --                                                         end)
+
+                               if c.name == "emacs@who.tetrane.org" then
+                                  emacsclient = c
+                               end
 
                                -- put this in your "manage" signal handler
                                c:add_signal("property::urgent",
