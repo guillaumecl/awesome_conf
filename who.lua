@@ -33,6 +33,7 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey,           }, "y", function () awful.util.spawn("/home/gclement/src/tmpc/build/tmpc") end),
    awful.key({ modkey,           }, "c", function () awful.util.spawn("/home/gclement/src/tmpc/build/tmpc --current") end),
    awful.key({ modkey,           }, "q", function () awful.util.spawn("/tmp/builds/reven/release/output/qtClient3d/qtClient3d") end),
+   awful.key({ modkey,           }, "i", function () awful.util.spawn(terminal .. " -e irssi") end),
    awful.key({               }, "Print", function () awful.util.spawn("ksnapshot") end)
 )
 
