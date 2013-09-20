@@ -18,7 +18,7 @@ globalkeys = awful.util.table.join(
 							  end)
 )
 
-browser = "qupzilla"
+browser = "qupzilla -nw"
 browser_instance = { instance = "qupzilla" }
 
 

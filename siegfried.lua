@@ -9,7 +9,7 @@ for s = 1, screen.count() do
    -- "➓"
 end
 
-browser = "qupzilla"
+browser = "qupzilla -nw"
 browser_instance = { instance = "qupzilla" }
 
 
