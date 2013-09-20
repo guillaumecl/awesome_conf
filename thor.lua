@@ -19,3 +19,8 @@ globalkeys = awful.util.table.join(
 )
 
 browser = "qupzilla"
+browser_instance = { instance = "qupzilla" }
+
+
+filer = "rox"
+filer_instance = { instance = "rox" }

@@ -10,6 +10,12 @@ awful.layout.set(awful.layout.suit.tile.bottom, tags[2][2])
 awful.tag.setnmaster(2, tags[2][2])
 awful.tag.setmwfact(0.85, tags[2][2])
 
+
+filer = "rox"
+filer_instance = { instance = "rox" }
+
+
+
 customtags = true
 
 

@@ -9,6 +9,10 @@ for s = 1, screen.count() do
    -- "➓"
 end
 
+browser = "qupzilla"
+browser_instance = { instance = "qupzilla" }
+
+
 
 rules = {
    { rule = { instance = "emacs" },

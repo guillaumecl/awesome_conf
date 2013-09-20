@@ -108,6 +108,10 @@ editor = os.getenv("VISUAL") or "emacsclient -c -a ''"
 editor_cmd = "emacsclient -c -a ''"
 
 browser = "firefox"
+browser_instance = { instance = "Navigator" }
+
+filer = "dolphin"
+filer_instance = { instance = "dolphin" }
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -337,20 +341,23 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey            }, "e",function ()
                                            run_or_raise(editor_cmd, { instance = "emacs" } )
                                         end),
-   awful.key({ modkey            }, "d",function () awful.util.spawn( "dolphin" ) end),
-   awful.key({ modkey            }, "w",function () awful.util.spawn( browser ) end),
+   awful.key({ modkey            }, "d",function () run_or_raise(filer, filer_instance ) end),
+   awful.key({ modkey, "Shift"   }, "d",function () awful.util.spawn(filer ) end),
+   awful.key({ modkey            }, "w",function () run_or_raise( browser, browser_instance ) end),
+   awful.key({ modkey, "Shift"   }, "w",function () awful.util.spawn( browser ) end),
 
    awful.key({ modkey, "Shift"   }, "Right",function () awful.util.spawn( "mpc next" ) end),
    awful.key({ modkey, "Shift"   }, "Left",function () awful.util.spawn( "mpc prev" ) end),
    awful.key({ modkey, "Shift"   }, "Return",function () awful.util.spawn( "mpc toggle" ) end),
-   --   awful.key({ modkey, "Shift"   }, "Backspace",function () awful.util.spawn( "mpc stop" ) end),
+
    awful.key({ modkey, "Shift"   }, "Down", function () awful.util.spawn("amixer -q sset Master 2dB-") end),
    awful.key({ modkey, "Shift"   }, "Up", function () awful.util.spawn("amixer -q sset Master 2dB+") end),
 
 
-   awful.key({ }, "XF86Calculator",function () awful.util.spawn( "kcalc" ) end),
-   awful.key({ }, "XF86Mail",function () awful.util.spawn( "kmail" ) end),
-   awful.key({ }, "XF86HomePage",function () awful.util.spawn( "x-www-browser" ) end),
+   awful.key({                   }, "XF86Calculator",function () run_or_raise( "kcalc", { instance = "kcalc" } ) end),
+   awful.key({                   }, "XF86Mail",function () run_or_raise( "kmail", { instance = "kmail" } ) end),
+   awful.key({                   }, "XF86HomePage",function () run_or_raise( browser, browser_instance ) end),
+   awful.key({ "Shift"           }, "XF86HomePage",function () awful.util.spawn( browser ) end),
 
    awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
