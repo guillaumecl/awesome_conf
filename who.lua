@@ -30,11 +30,11 @@ globalkeys = awful.util.table.join(
 											 awful.util.spawn("amixer -q sset Master toggle")
 										  end),
    awful.key({ modkey,           }, "p", function () awful.util.spawn("bash -c 'cd /tmp/builds/reven/release/python/ ; ipython qtconsole --colors=linux --autoindent --ConsoleWidget.font_family=\"Terminus\" --ConsoleWidget.font_size=11'") end),
-   awful.key({ modkey,           }, "y", function () awful.util.spawn("/home/gclement/src/tmpc/build/tmpc") end),
+   awful.key({ modkey,           }, "y", function () run_or_raise("/home/gclement/src/tmpc/build/tmpc", { instance = "tmpc" } ) end),
    awful.key({ modkey,           }, "c", function () awful.util.spawn("/home/gclement/src/tmpc/build/tmpc --current") end),
-   awful.key({ modkey,           }, "q", function () awful.util.spawn("/tmp/builds/reven/release/output/qtClient3d/qtClient3d") end),
-   awful.key({ modkey,           }, "i", function () awful.util.spawn(terminal .. " -e irssi") end),
-   awful.key({               }, "Print", function () awful.util.spawn("ksnapshot") end)
+   awful.key({ modkey,           }, "q", function () run_or_raise(terminal .. "/tmp/builds/reven/release/output/qtClient3d/qtClient3d", { instance = "qtClient3d" }) end),
+   awful.key({ modkey,           }, "i", function () run_or_raise(terminal .. " -e irssi", { name = "irssi" } ) end),
+   awful.key({               }, "Print", function () run_or_raise("ksnapshot", { instance = "ksnapshot" }) end)
 )
 
 rules = {
