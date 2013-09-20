@@ -340,7 +340,7 @@ globalkeys = awful.util.table.join(
    awful.key({                   }, "XF86AudioStop",function () awful.util.spawn( "mpc stop" ) end),
 
    awful.key({ modkey            }, "e",function () run_or_raise(editor_cmd, { instance = "emacs" } ) end),
-   awful.key({ modkey, "Shift"   }, "e",function () run_or_raise(editor_cmd, { instance = "emacs" } ) end),
+   awful.key({ modkey, "Shift"   }, "e",function () awful.util.spawn(editor_cmd ) end),
 
    awful.key({ modkey            }, "d",function () run_or_raise(filer, filer_instance ) end),
    awful.key({ modkey, "Shift"   }, "d",function () awful.util.spawn(filer ) end),
