@@ -332,17 +332,19 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey,           }, "F2", function () awful.util.spawn(base .. "/changeInput.sh fr bepo") end),
    awful.key({ modkey,           }, "F3", function () awful.util.spawn(base .. "/changeInput.sh us") end),
 
-   awful.key({ }, "XF86AudioNext",function () awful.util.spawn( "mpc next" ) end),
-   awful.key({ }, "XF86AudioPrev",function () awful.util.spawn( "mpc prev" ) end),
-   awful.key({ "Shift" }, "XF86AudioPrev",function () awful.util.spawn( "mpc seek -00:00:05" ) end),
-   awful.key({ "Shift" }, "XF86AudioNext",function () awful.util.spawn( "mpc seek +00:00:05" ) end),
-   awful.key({ }, "XF86AudioPlay",function () awful.util.spawn( "mpc toggle" ) end),
-   awful.key({ }, "XF86AudioStop",function () awful.util.spawn( "mpc stop" ) end),
-   awful.key({ modkey            }, "e",function ()
-                                           run_or_raise(editor_cmd, { instance = "emacs" } )
-                                        end),
+   awful.key({                   }, "XF86AudioNext",function () awful.util.spawn( "mpc next" ) end),
+   awful.key({                   }, "XF86AudioPrev",function () awful.util.spawn( "mpc prev" ) end),
+   awful.key({ "Shift"           }, "XF86AudioPrev",function () awful.util.spawn( "mpc seek -00:00:05" ) end),
+   awful.key({ "Shift"           }, "XF86AudioNext",function () awful.util.spawn( "mpc seek +00:00:05" ) end),
+   awful.key({                   }, "XF86AudioPlay",function () awful.util.spawn( "mpc toggle" ) end),
+   awful.key({                   }, "XF86AudioStop",function () awful.util.spawn( "mpc stop" ) end),
+
+   awful.key({ modkey            }, "e",function () run_or_raise(editor_cmd, { instance = "emacs" } ) end),
+   awful.key({ modkey, "Shift"   }, "e",function () run_or_raise(editor_cmd, { instance = "emacs" } ) end),
+
    awful.key({ modkey            }, "d",function () run_or_raise(filer, filer_instance ) end),
    awful.key({ modkey, "Shift"   }, "d",function () awful.util.spawn(filer ) end),
+
    awful.key({ modkey            }, "w",function () run_or_raise( browser, browser_instance ) end),
    awful.key({ modkey, "Shift"   }, "w",function () awful.util.spawn( browser ) end),
 
@@ -356,25 +358,27 @@ globalkeys = awful.util.table.join(
 
    awful.key({                   }, "XF86Calculator",function () run_or_raise( "kcalc", { instance = "kcalc" } ) end),
    awful.key({                   }, "XF86Mail",function () run_or_raise( "kmail", { instance = "kmail" } ) end),
+
    awful.key({                   }, "XF86HomePage",function () run_or_raise( browser, browser_instance ) end),
    awful.key({ "Shift"           }, "XF86HomePage",function () awful.util.spawn( browser ) end),
 
    awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
    -- Prompt
-   awful.key({ modkey },            "r",     function ()
+   awful.key({ modkey            }, "r",     function ()
 												mywibox[mouse.screen].visible = true
                                                 mypromptbox[mouse.screen]:run()
                                              end),
 
-   awful.key({ modkey }, "x",
+   awful.key({ modkey            }, "x",
              function ()
                 awful.prompt.run({ prompt = "Run Lua code: " },
                                  mypromptbox[mouse.screen].widget,
                                  awful.util.eval, nil,
                                  awful.util.getdir("cache") .. "/history_eval")
              end),
-   awful.key({ modkey }, "b", function ()
+
+   awful.key({ modkey            }, "b", function ()
                                  mywibox[mouse.screen].visible = not mywibox[mouse.screen].visible
                               end),
 
