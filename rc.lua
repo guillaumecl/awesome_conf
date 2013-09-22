@@ -7,8 +7,6 @@ require("beautiful")
 -- Notification library
 require("naughty")
 
-emacsclient = nil
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -315,7 +313,7 @@ globalkeys = awful.util.table.join(
              end),
 
    -- Standard program
-   awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal .. " -e bash -c 'cd; bash'") end),
+   awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
    awful.key({ modkey, "Control" }, "r", awesome.restart),
    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
