@@ -22,9 +22,9 @@ customtags = true
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
    globalkeys,
-   awful.key({ modkey,           }, "F12", function () awful.util.spawn(terminal .. " -e bash -c 'cd /home/gclement/src/tetrane/reven ; bash'") end),
-   awful.key({ modkey,           }, "F11", function () awful.util.spawn(terminal .. " -e bash -c 'cd /tmp/builds/reven/release/ ; bash'") end),
-   awful.key({ modkey,           }, "F10", function () awful.util.spawn(terminal .. " -e bash -c 'cd /tmp/builds/reven/debug/ ; bash'") end),
+   awful.key({ modkey,           }, "F12", function () awful.util.spawn(terminal .. " -cd /home/gclement/src/tetrane/reven") end),
+   awful.key({ modkey,           }, "F11", function () awful.util.spawn(terminal .. " -cd /tmp/builds/reven/release") end),
+   awful.key({ modkey,           }, "F10", function () awful.util.spawn(terminal .. " -cd /tmp/builds/reven/debug") end),
    awful.key({ "Control", "Mod1" }, "l", function () awful.util.spawn("xscreensaver-command -lock") end),
    awful.key({ }, "XF86AudioLowerVolume", function ()
 											 awful.util.spawn("amixer -q sset Master 2-")
@@ -43,29 +43,9 @@ globalkeys = awful.util.table.join(
 )
 
 rules = {
-   -- { rule = { instance = "emacs" },
-   --   properties = { tag = tags[1][1] } },
-   { rule = { instance = "emacs_right" },
-     properties = { tag = tags[2][1] } },
---   { rule = { class = "QtClient3d" },
---     properties = { tag = tags[2][1] } },
    { rule = { class = "URxvt" },
      except = { name = "reven" },
      callback = awful.client.setslave ,
      properties = { border_width = 0 },
    },
-   -- { rule = { class = "URxvt",  name = "reven" },
-   --   callback = function(c)
-   --                 cur = awful.client.getmaster(2)
-   --                 awful.client.setmaster(c)
-   --                 awful.client.setmaster(cur)
-   --              end,
-   --   properties = { border_width = 0 },
-   -- },
-   -- { rule = { class = "Xdot" },
-   --   callback =  function(c)
-   --                 cur = awful.client.getmaster(2)
-   --                 awful.client.setmaster(c)
-   --                 awful.client.setmaster(cur)
-   --              end },
 }
