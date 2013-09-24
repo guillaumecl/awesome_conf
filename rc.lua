@@ -66,6 +66,7 @@ function run_or_raise(cmd, properties)
       else
          -- Otherwise, pop to first tag client is visible on
          awful.tag.viewonly(ctags[1])
+         awful.screen.focus(awful.tag.getproperty(ctags[1], "screen"))
       end
       -- And then focus the client
       client.focus = c
