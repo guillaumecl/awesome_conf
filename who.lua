@@ -39,7 +39,6 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey,           }, "y", function () run_or_raise("/home/gclement/src/tmpc/build/tmpc", { instance = "tmpc" } ) end),
    awful.key({ modkey,           }, "c", function () awful.util.spawn("/home/gclement/src/tmpc/build/tmpc --current") end),
    awful.key({ modkey,           }, "q", function () run_or_raise("/tmp/builds/reven/release/output/qtClient3d/qtClient3d", { instance = "qtClient3d" }) end),
-   awful.key({ modkey,           }, "i", function () run_or_raise(terminal .. " -e irssi", { name = "irssi" } ) end),
    awful.key({               }, "Print", function () run_or_raise("ksnapshot", { instance = "ksnapshot" }) end)
 )
 

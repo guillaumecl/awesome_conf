@@ -349,6 +349,8 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey            }, "w",function () run_or_raise( browser, browser_instance ) end),
    awful.key({ modkey, "Shift"   }, "w",function () awful.util.spawn( browser ) end),
 
+   awful.key({ modkey,           }, "i", function () run_or_raise(terminal .. " -e irssi", { name = "irssi" } ) end),
+
    awful.key({ modkey, "Shift"   }, "Right",function () awful.util.spawn( "mpc next" ) end),
    awful.key({ modkey, "Shift"   }, "Left",function () awful.util.spawn( "mpc prev" ) end),
    awful.key({ modkey, "Shift"   }, "Return",function () awful.util.spawn( "mpc toggle" ) end),
