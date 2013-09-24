@@ -27,14 +27,14 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey,           }, "F10", function () awful.util.spawn(terminal .. " -cd /tmp/builds/reven/debug") end),
    awful.key({ "Control", "Mod1" }, "l", function () awful.util.spawn("xscreensaver-command -lock") end),
    awful.key({ }, "XF86AudioLowerVolume", function ()
-											 awful.util.spawn("amixer -q sset Master 2-")
-										  end),
+				awful.util.spawn("amixer -q sset Master 2-")
+   end),
    awful.key({ }, "XF86AudioRaiseVolume", function ()
-											 awful.util.spawn("amixer -q sset Master 2+")
-										  end),
+				awful.util.spawn("amixer -q sset Master 2+")
+   end),
    awful.key({ }, "XF86AudioMute", function ()
-											 awful.util.spawn("amixer -q sset Master toggle")
-										  end),
+				awful.util.spawn("amixer -q sset Master toggle")
+   end),
    awful.key({ modkey,           }, "p", function () awful.util.spawn("bash -c 'cd /tmp/builds/reven/release/python/ ; ipython qtconsole --colors=linux --autoindent --ConsoleWidget.font_family=\"Terminus\" --ConsoleWidget.font_size=11'") end),
    awful.key({ modkey,           }, "y", function () run_or_raise("/home/gclement/src/tmpc/build/tmpc", { instance = "tmpc" } ) end),
    awful.key({ modkey,           }, "c", function () awful.util.spawn("/home/gclement/src/tmpc/build/tmpc --current") end),
