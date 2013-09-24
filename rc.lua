@@ -340,6 +340,9 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey            }, "e",function () run_or_raise(editor_cmd, { instance = "emacs" } ) end),
    awful.key({ modkey, "Shift"   }, "e",function () awful.util.spawn(editor_cmd ) end),
 
+   awful.key({ modkey            }, "a",function () run_or_raise(terminal .. " -t emacs -e emacs -nw", { name = "emacs", instance="urxvt" } ) end),
+   awful.key({ modkey, "Shift"   }, "a",function () awful.util.spawn(terminal .. " -t emacs -e emacs -nw" ) end),
+
    awful.key({ modkey            }, "d",function () run_or_raise(filer, filer_instance ) end),
    awful.key({ modkey, "Shift"   }, "d",function () awful.util.spawn(filer ) end),
 
@@ -516,10 +519,6 @@ client.add_signal("manage", function (c, startup)
 --                                                               client.focus = c
 --                                                            end
 --                                                         end)
-
-                               if c.name == "emacs@who.tetrane.org" then
-                                  emacsclient = c
-                               end
 
                                -- put this in your "manage" signal handler
                                c:add_signal("property::urgent",
