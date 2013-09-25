@@ -66,6 +66,7 @@ function run_or_raise(cmd, properties)
       else
          -- Otherwise, pop to first tag client is visible on
          awful.tag.viewonly(ctags[1])
+         awful.screen.focus(awful.tag.getproperty(ctags[1], "screen"))
       end
       -- And then focus the client
       client.focus = c
@@ -368,12 +369,12 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
    -- Prompt
-   awful.key({ modkey            }, "r",     function ()
-												mywibox[mouse.screen].visible = true
-                                                mypromptbox[mouse.screen]:run()
-                                             end),
+   awful.key({ modkey            }, "r", function ()
+				mywibox[mouse.screen].visible = true
+				mypromptbox[mouse.screen]:run()
+   end),
 
-   awful.key({ modkey            }, "x",
+   awful.key({ modkey, "Shift"   }, "x",
              function ()
                 awful.prompt.run({ prompt = "Run Lua code: " },
                                  mypromptbox[mouse.screen].widget,
@@ -515,9 +516,10 @@ awful.rules.rules = awful.util.table.join(
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.add_signal("manage", function (c, startup)
-                               -- Add a titlebar
-                               -- awful.titlebar.add(c, { modkey = modkey })
-
+					 -- Add a titlebar
+					 if awful.client.floating.get(c) then
+						awful.titlebar.add(c, { modkey = modkey })
+					 end
                                -- Enable sloppy focus
 --                               c:add_signal("mouse::enter", function(c)
 --                                                               if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
@@ -529,11 +531,20 @@ client.add_signal("manage", function (c, startup)
                                -- put this in your "manage" signal handler
                                c:add_signal("property::urgent",
                                             function(c)
-                                               if c.urgent then
+                                               if c.urgent and c.name then
                                                   -- Show a popup notification with the window title
                                                   naughty.notify({text="Urgent: " .. c.name})
                                                end
                                             end)
+                               -- Signal function to execute when client float property changes
+							   c:add_signal("property::floating", function(c)
+											   if awful.client.floating.get(c) then
+												  awful.titlebar.add(c, { modkey = modkey })
+											   else
+												  awful.titlebar.remove(c)
+											   end
+							   end)
+
                                if not startup then
                                   -- Set the windows at the slave,
                                   -- i.e. put it at the end of others instead of setting it master.
