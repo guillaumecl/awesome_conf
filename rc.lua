@@ -513,7 +513,7 @@ awful.rules.rules = awful.util.table.join(
 -- Signal function to execute when a new client appears.
 client.add_signal("manage", function (c, startup)
 					 -- Add a titlebar
-					 if awful.client.floating.get(c) then
+					 if awful.client.floating.get(c) and (not c.name or c.instance ~= "tmpc") then
 						awful.titlebar.add(c, { modkey = modkey })
 					 end
                                -- Enable sloppy focus
