@@ -475,6 +475,10 @@ baserules = {
                     maximized_horizontal = false
                  }
   },
+   { rule = { class = "URxvt" },
+     callback = awful.client.setslave ,
+     properties = { border_width = 0 },
+   },
    { rule = { class = "MPlayer" },
      properties = { floating = true } },
    { rule = { class = "Kcalc" },
