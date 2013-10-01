@@ -8,22 +8,52 @@ customtags = true
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ }, "XF86AudioLowerVolume", function ()
-				awful.util.spawn("amixer -M -c 0 -q sset Master 2-")
+				awful.util.spawn("amixer -M -c 0 -q sset Master 2dB-")
    end),
    awful.key({ }, "XF86AudioRaiseVolume", function ()
-				awful.util.spawn("amixer -M -c 0 -q sset Master 2+")
+				awful.util.spawn("amixer -M -c 0 -q sset Master 2dB+")
    end),
    awful.key({ }, "XF86AudioMute", function ()
 				awful.util.spawn("amixer -M -c 0 -q sset Master toggle")
    end),
+
+   awful.key({ "Control"}, "XF86AudioLowerVolume", function ()
+				awful.util.spawn("ssh odin amixer -M -c 0 -q sset Master 2-")
+   end),
+   awful.key({ "Control" }, "XF86AudioRaiseVolume", function ()
+				awful.util.spawn("ssh odin amixer -M -c 0 -q sset Master 2+")
+   end),
+   awful.key({ "Control" }, "XF86AudioMute", function ()
+				awful.util.spawn("ssh odin amixer -M -c 0 -q sset Master toggle")
+   end),
+
+   awful.key({ modkey, "Control" }, "Return", function ()
+				awful.util.spawn("ssh odin mpc toggle")
+   end),
+   awful.key({ modkey, "Control" }, "Right", function ()
+				awful.util.spawn("ssh odin mpc next")
+   end),
+   awful.key({ modkey, "Control" }, "Left", function ()
+				awful.util.spawn("ssh odin mpc prev")
+   end),
+   awful.key({ modkey, "Control"}, "Up", function ()
+				awful.util.spawn("ssh odin amixer -M -c 0 -q sset Master 2dB+")
+   end),
+   awful.key({ modkey, "Control" }, "Down", function ()
+				awful.util.spawn("ssh odin amixer -M -c 0 -q sset Master 2dB-")
+   end),
+
    awful.key({ }, "XF86Tools", function ()
 				awful.util.spawn(base .. "/toggle_matchbox.sh")
    end),
    awful.key({ modkey,      }, "y", function ()
-				run_or_raise("/home/tortuxm/projets/build/tmpc/tmpc", { instance = "tmpc" } )
+				run_or_raise("bash -c 'cd /home/tortuxm/projets/build/tmpc; ./tmpc'", { instance = "tmpc" } )
+   end),
+   awful.key({ modkey, "Shift" }, "y", function ()
+				run_or_raise("bash -c 'cd /home/tortuxm/projets/build/tmpc; MPD_HOST=odin ./tmpc'", { instance = "tmpc" } )
    end),
    awful.key({ modkey,      }, "c", function ()
-				awful.util.spawn("/home/tortuxm/projets/build/tmpc/tmpc --current")
+				awful.util.spawn("bash -c 'cd /home/tortuxm/projets/build/tmpc; ./tmpc --current'")
    end)
 )
 
