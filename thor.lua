@@ -49,11 +49,14 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey,      }, "y", function ()
 				run_or_raise("bash -c 'cd /home/tortuxm/projets/build/tmpc; ./tmpc'", { instance = "tmpc" } )
    end),
-   awful.key({ modkey, "Shift" }, "y", function ()
+   awful.key({ modkey, "Control" }, "y", function ()
 				run_or_raise("bash -c 'cd /home/tortuxm/projets/build/tmpc; MPD_HOST=odin ./tmpc'", { instance = "tmpc" } )
    end),
    awful.key({ modkey,      }, "c", function ()
 				awful.util.spawn("bash -c 'cd /home/tortuxm/projets/build/tmpc; ./tmpc --current'")
+   end),
+   awful.key({ modkey, "Control" }, "c", function ()
+				awful.util.spawn("bash -c 'cd /home/tortuxm/projets/build/tmpc; MPD_HOST=odin ./tmpc --current'")
    end)
 )
 
