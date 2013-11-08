@@ -495,6 +495,8 @@ baserules = {
      properties = { tag = tags[1][2] } },
    { rule = { class = "Tmpc" },
      properties = { floating = true } },
+   { rule = { class = "dosbox" },
+     properties = { floating = false } },
    { rule = { class = "Plasmoidviewer" },
 	 properties = {
 		floating = true,
