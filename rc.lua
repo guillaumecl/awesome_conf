@@ -352,8 +352,8 @@ globalkeys = awful.util.table.join(
 
    awful.key({ modkey,           }, "i", function () run_or_raise(terminal .. " -e irssi", { name = "irssi" } ) end),
 
-   awful.key({ modkey            }, "s",function () run_or_raise("psi", { class = "psi", instance="main" } ) end),
-   awful.key({ modkey            }, "z",function () run_or_raise("psi", { class = "psi", instance="chat" } ) end),
+   awful.key({ modkey            }, "z",function () run_or_raise("psi", { class = "psi", instance="main" } ) end),
+   awful.key({ modkey            }, "s",function () run_or_raise("psi", { class = "psi", instance="chat" } ) end),
 
    awful.key({ modkey, "Shift"   }, "Right",function () awful.util.spawn( "mpc next" ) end),
    awful.key({ modkey, "Shift"   }, "Left",function () awful.util.spawn( "mpc prev" ) end),
