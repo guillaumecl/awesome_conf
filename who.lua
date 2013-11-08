@@ -29,11 +29,3 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey,           }, "q", function () run_or_raise("/tmp/builds/reven/release/output/qtClient3d/qtClient3d", { instance = "qtClient3d" }) end),
    awful.key({               }, "Print", function () run_or_raise("ksnapshot", { instance = "ksnapshot" }) end)
 )
-
-rules = {
-   { rule = { class = "URxvt" },
-     except = { name = "reven" },
-     callback = awful.client.setslave ,
-     properties = { border_width = 0 },
-   },
-}
