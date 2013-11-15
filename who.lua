@@ -7,8 +7,9 @@ tags[1] = awful.tag({ "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "�
 tags[2] = awful.tag({ "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒"}, 2, awful.layout.suit.tile)
 
 awful.layout.set(awful.layout.suit.tile.bottom, tags[2][2])
-awful.tag.setnmaster(2, tags[2][2])
+--awful.tag.setnmaster(2, tags[2][2])
 awful.tag.setmwfact(0.85, tags[2][2])
+awful.tag.setmwfact(0.85, tags[2][1])
 
 customtags = true
 
