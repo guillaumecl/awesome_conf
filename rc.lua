@@ -79,6 +79,9 @@ end
 -- Returns true if all pairs in table1 are present in table2
 function match (table1, table2)
    for k, v in pairs(table1) do
+      if not table2[k] then
+         return false
+      end
       if table2[k] ~= v and not table2[k]:find(v) then
          return false
       end
@@ -352,8 +355,8 @@ globalkeys = awful.util.table.join(
 
    awful.key({ modkey,           }, "i", function () run_or_raise(terminal .. " -e irssi", { name = "irssi" } ) end),
 
-   awful.key({ modkey            }, "z",function () run_or_raise("psi", { name="psi", instance="main" } ) end),
-   awful.key({ modkey            }, "s",function () run_or_raise("psi", { name="psi", instance="chat" } ) end),
+   awful.key({ modkey            }, "z",function () run_or_raise("psi", { class="psi", instance="main" } ) end),
+   awful.key({ modkey            }, "s",function () run_or_raise("psi", { class="psi", instance="chat" } ) end),
 
    awful.key({ modkey, "Shift"   }, "Right",function () awful.util.spawn( "mpc next" ) end),
    awful.key({ modkey, "Shift"   }, "Left",function () awful.util.spawn( "mpc prev" ) end),
@@ -555,7 +558,7 @@ client.add_signal("manage", function (c, startup)
                      end
 
                      if c.class and c.class == "URxvt" then
-                        if c.name and not c.name == "irssi" then
+                        if c.name and c.name ~= "irssi" then
                            awful.client.setslave(c)
                         end
                      end
