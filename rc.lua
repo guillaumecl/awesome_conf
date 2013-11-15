@@ -352,8 +352,8 @@ globalkeys = awful.util.table.join(
 
    awful.key({ modkey,           }, "i", function () run_or_raise(terminal .. " -e irssi", { name = "irssi" } ) end),
 
-   awful.key({ modkey            }, "z",function () run_or_raise("psi", { class = "psi", instance="main" } ) end),
-   awful.key({ modkey            }, "s",function () run_or_raise("psi", { class = "psi", instance="chat" } ) end),
+   awful.key({ modkey            }, "z",function () run_or_raise("psi", { name="psi", instance="main" } ) end),
+   awful.key({ modkey            }, "s",function () run_or_raise("psi", { name="psi", instance="chat" } ) end),
 
    awful.key({ modkey, "Shift"   }, "Right",function () awful.util.spawn( "mpc next" ) end),
    awful.key({ modkey, "Shift"   }, "Left",function () awful.util.spawn( "mpc prev" ) end),
@@ -365,6 +365,7 @@ globalkeys = awful.util.table.join(
 
    awful.key({                   }, "XF86Calculator",function () run_or_raise( "kcalc", { instance = "kcalc" } ) end),
    awful.key({                   }, "XF86Mail",function () run_or_raise( "kmail", { instance = "kmail" } ) end),
+   awful.key({ "Shift"           }, "XF86Mail",function () awful.util.spawn( "kmail --composer" ) end),
 
    awful.key({                   }, "XF86HomePage",function () run_or_raise( browser, browser_instance ) end),
    awful.key({ "Shift"           }, "XF86HomePage",function () awful.util.spawn( browser ) end),
@@ -552,7 +553,9 @@ client.add_signal("manage", function (c, startup)
                      end
 
                      if c.class and c.class == "URxvt" then
-                        awful.client.setslave(c)
+                        if c.name and not c.name == "irssi" then
+                           awful.client.setslave(c)
+                        end
                      end
 
                      if not startup then
