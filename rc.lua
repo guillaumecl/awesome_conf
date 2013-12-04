@@ -344,8 +344,8 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey            }, "e",function () run_or_raise(editor_cmd, { instance = "emacs" } ) end),
    awful.key({ modkey, "Shift"   }, "e",function () awful.util.spawn(editor_cmd ) end),
 
-   awful.key({ modkey            }, "a",function () run_or_raise(terminal .. " -e emacs -nw", { name = "emacs", instance="urxvt" } ) end),
-   awful.key({ modkey, "Shift"   }, "a",function () awful.util.spawn(terminal .. " -e emacs -nw" ) end),
+   awful.key({ modkey            }, "a",function () run_or_raise(terminal .. " -e emacsclient -c -a '' -nw", { name = "emacs", instance="urxvt" } ) end),
+   awful.key({ modkey, "Shift"   }, "a",function () awful.util.spawn(terminal .. " -e emacsclient -c -a '' -nw" ) end),
 
    awful.key({ modkey            }, "d",function () run_or_raise(filer, filer_instance ) end),
    awful.key({ modkey, "Shift"   }, "d",function () awful.util.spawn(filer ) end),
