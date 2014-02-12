@@ -60,8 +60,8 @@ globalkeys = awful.util.table.join(
    end)
 )
 
-browser = "qupzilla -nw"
-browser_instance = { instance = "qupzilla" }
+browser = "firefox-bin -nw"
+browser_instance = { instance = "Navigator" }
 
 
 filer = "rox"
