@@ -123,12 +123,10 @@ filer_instance = { instance = "dolphin" }
 modkey = "Mod4"
 
 customtags = false
-custommenu = false
 tags = {}
 rules = awful.util.table.join()
 globalkeys = awful.util.table.join()
 clientkeys = awful.util.table.join()
-mainmenu = {}
 
 
 
@@ -165,25 +163,6 @@ if not customtags then
    -- }}}
 end
 
--- {{{ Menu
--- Create a laucher widget and a main menu
-if not custommenu then
-   submenu = {
-      { "manual", terminal .. " -e man awesome" },
-      { "edit config", editor_cmd .. " " .. awesome.conffile },
-      { "restart", awesome.restart },
-      { "quit", awesome.quit }
-   }
-
-
-   mainmenu = awful.menu({ items = { { "awesome", submenu, beautiful.awesome_icon },
-                                     { "open terminal", terminal }
-                                  }
-                        })
-end
-
-launcher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
-                                   menu = mainmenu })
 -- }}}
 
 -- {{{ Wibox
@@ -262,7 +241,6 @@ for s = 1, screen.count() do
    -- Add widgets to the wibox - order matters
    mywibox[s].widgets = {
       {
-         launcher,
          mytaglist[s],
          mypromptbox[s],
          layout = awful.widget.layout.horizontal.leftright
