@@ -75,5 +75,14 @@ rules = {
    { rule = { name = "Keyboard" },
 	 callback =  function(c)
 		awful.client.setslave(c)
-   end }
+   end },
+   {
+	  rule = { class = "qemu-system-i386" },
+	  properties = {
+		 fullscreen = true,
+		 maximized = true,
+		 width=1024,
+		 height=600
+	  }
+   },
 }
