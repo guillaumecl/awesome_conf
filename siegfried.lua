@@ -54,3 +54,13 @@ globalkeys = awful.util.table.join(
 )
 
 
+rules = {
+   {
+	  rule = { class = "qemu-system-x86_64" },
+	  properties = {
+		 fullscreen = true,
+		 width=1600,
+		 height=900
+	  }
+   },
+}
