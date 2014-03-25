@@ -4,7 +4,6 @@ tags[1] = awful.tag({ "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "�
 
 customtags = true
 
-
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ }, "XF86AudioLowerVolume", function ()
@@ -60,13 +59,15 @@ globalkeys = awful.util.table.join(
    end)
 )
 
-browser = "firefox-bin -nw"
-browser_instance = { instance = "Navigator" }
+--browser = "firefox-bin -nw"
+--browser_instance = { instance = "Navigator" }
+browser = "uzbl-browser"
+browser_instance = { instance = "uzbl-core" }
+
 
 
 filer = "rox"
 filer_instance = { instance = "rox" }
-
 
 
 
@@ -80,7 +81,6 @@ rules = {
 	  rule = { class = "qemu-system-i386" },
 	  properties = {
 		 fullscreen = true,
-		 maximized = true,
 		 width=1024,
 		 height=600
 	  }
