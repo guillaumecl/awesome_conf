@@ -59,11 +59,8 @@ globalkeys = awful.util.table.join(
    end)
 )
 
---browser = "firefox-bin -nw"
---browser_instance = { instance = "Navigator" }
-browser = "uzbl-browser"
-browser_instance = { instance = "uzbl-core" }
-
+browser = "firefox-bin -nw"
+browser_instance = { instance = "Navigator" }
 
 
 filer = "rox"
