@@ -1,6 +1,9 @@
 tags = {}
 
 tags[1] = awful.tag({ "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒"}, 1, awful.layout.suit.tile.bottom)
+if screen.count() == 2 then
+   tags[2] = awful.tag({ "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒"}, 2, awful.layout.suit.tile.bottom)
+end
 
 customtags = true
 
