@@ -4,12 +4,15 @@
 tags = {}
 
 tags[1] = awful.tag({ "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒"}, 1, awful.layout.suit.tile)
-tags[2] = awful.tag({ "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒"}, 2, awful.layout.suit.tile)
 
-awful.layout.set(awful.layout.suit.tile.bottom, tags[2][2])
---awful.tag.setnmaster(2, tags[2][2])
-awful.tag.setmwfact(0.85, tags[2][2])
-awful.tag.setmwfact(0.85, tags[2][1])
+if screen.count() == 2 then
+   tags[2] = awful.tag({ "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒"}, 2, awful.layout.suit.tile)
+   awful.layout.set(awful.layout.suit.tile.bottom, tags[2][2])
+   --awful.tag.setnmaster(2, tags[2][2])
+   awful.tag.setmwfact(0.85, tags[2][2])
+   awful.tag.setmwfact(0.85, tags[2][1])
+end
+
 
 customtags = true
 
@@ -27,6 +30,6 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey,           }, "p", function () awful.util.spawn("bash -c 'cd /tmp/builds/reven/release/python/ ; ipython qtconsole --colors=linux --autoindent --ConsoleWidget.font_family=\"Terminus\" --ConsoleWidget.font_size=11'") end),
    awful.key({ modkey,           }, "y", function () run_or_raise("/home/gclement/src/tmpc/build/tmpc", { instance = "tmpc" } ) end),
    awful.key({ modkey,           }, "c", function () awful.util.spawn("/home/gclement/src/tmpc/build/tmpc --current") end),
-   awful.key({ modkey,           }, "q", function () run_or_raise("/tmp/builds/reven/release/output/axion/axion", { instance = "axion" }) end),
+   awful.key({ modkey,           }, "q", function () run_or_raise("/tmp/builds/reven/release/output/axion/axion --host localhost --port 1337", { instance = "axion" }) end),
    awful.key({               }, "Print", function () run_or_raise("ksnapshot", { instance = "ksnapshot" }) end)
 )
