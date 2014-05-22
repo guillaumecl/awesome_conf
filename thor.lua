@@ -20,29 +20,29 @@ globalkeys = awful.util.table.join(
    end),
 
    awful.key({ "Control"}, "XF86AudioLowerVolume", function ()
-				awful.util.spawn("ssh odin amixer -M -c 0 -q sset Master 2-")
+				awful.util.spawn("ssh rozalin amixer -M -c 0 -q sset Master 2-")
    end),
    awful.key({ "Control" }, "XF86AudioRaiseVolume", function ()
-				awful.util.spawn("ssh odin amixer -M -c 0 -q sset Master 2+")
+				awful.util.spawn("ssh rozalin amixer -M -c 0 -q sset Master 2+")
    end),
    awful.key({ "Control" }, "XF86AudioMute", function ()
-				awful.util.spawn("ssh odin amixer -M -c 0 -q sset Master toggle")
+				awful.util.spawn("ssh rozalin amixer -M -c 0 -q sset Master toggle")
    end),
 
    awful.key({ modkey, "Control" }, "Return", function ()
-				awful.util.spawn("ssh odin mpc toggle")
+				awful.util.spawn("ssh rozalin mpc toggle")
    end),
    awful.key({ modkey, "Control" }, "Right", function ()
-				awful.util.spawn("ssh odin mpc next")
+				awful.util.spawn("ssh rozalin mpc next")
    end),
    awful.key({ modkey, "Control" }, "Left", function ()
-				awful.util.spawn("ssh odin mpc prev")
+				awful.util.spawn("ssh rozalin mpc prev")
    end),
    awful.key({ modkey, "Control"}, "Up", function ()
-				awful.util.spawn("ssh odin amixer -M -c 0 -q sset Master 2dB+")
+				awful.util.spawn("ssh rozalin amixer -M -c 0 -q sset Master 2dB+")
    end),
    awful.key({ modkey, "Control" }, "Down", function ()
-				awful.util.spawn("ssh odin amixer -M -c 0 -q sset Master 2dB-")
+				awful.util.spawn("ssh rozalin amixer -M -c 0 -q sset Master 2dB-")
    end),
 
    awful.key({ }, "XF86Tools", function ()
@@ -52,13 +52,13 @@ globalkeys = awful.util.table.join(
 				run_or_raise("bash -c 'cd /home/tortuxm/projets/build/tmpc; ./tmpc'", { instance = "tmpc" } )
    end),
    awful.key({ modkey, "Control" }, "y", function ()
-				run_or_raise("bash -c 'cd /home/tortuxm/projets/build/tmpc; ./tmpc -hodin'", { instance = "tmpc" } )
+				run_or_raise("bash -c 'cd /home/tortuxm/projets/build/tmpc; ./tmpc -hrozalin'", { instance = "tmpc" } )
    end),
    awful.key({ modkey,      }, "c", function ()
 				awful.util.spawn("bash -c 'cd /home/tortuxm/projets/build/tmpc; ./tmpc -c'")
    end),
    awful.key({ modkey, "Control" }, "c", function ()
-				awful.util.spawn("bash -c 'cd /home/tortuxm/projets/build/tmpc; ./tmpc -c -hodin'")
+				awful.util.spawn("bash -c 'cd /home/tortuxm/projets/build/tmpc; ./tmpc -c -hrozalin'")
    end)
 )
 
@@ -80,7 +80,7 @@ rules = {
    {
 	  rule = { class = "qemu-system-i386" },
 	  properties = {
-		 fullscreen = true,
+--		 fullscreen = true,
 		 width=1024,
 		 height=600
 	  }
