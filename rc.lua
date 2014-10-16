@@ -481,6 +481,8 @@ baserules = {
      properties = { tag = tags[1][2] } },
    { rule = { class = "Tmpc" },
      properties = { floating = true } },
+   { rule = { class = "Bloblines" },
+     properties = { floating = true } },
    { rule = { class = "dosbox" },
      properties = { floating = false } },
    { rule = { class = "Plasmoidviewer" },
@@ -505,7 +507,7 @@ awful.rules.rules = awful.util.table.join(
 -- Signal function to execute when a new client appears.
 client.add_signal("manage", function (c, startup)
 					 -- Add a titlebar
-					 if awful.client.floating.get(c) and (not c.name or c.instance ~= "tmpc") then
+					 if awful.client.floating.get(c) and (not c.name or (c.instance ~= "tmpc" and c.instance ~= "Bloblines")) then
 						awful.titlebar.add(c, { modkey = modkey })
 					 end
                      -- Enable sloppy focus
