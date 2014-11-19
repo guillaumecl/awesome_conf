@@ -20,6 +20,10 @@ customtags = true
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
    globalkeys,
+   awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -c 0 -q sset Master 2dB-") end),
+   awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -c 0 -q sset Master 2dB+") end),
+   awful.key({ }, "XF86AudioMute"       , function () awful.util.spawn("amixer -c 0 -q sset Master toggle") end),
+
    awful.key({ modkey,           }, "F12", function () awful.util.spawn(terminal .. " -cd /home/gclement/src/tetrane/reven") end),
    awful.key({ modkey,           }, "F11", function () awful.util.spawn(terminal .. " -cd /tmp/builds/reven/release") end),
    awful.key({ modkey,           }, "F10", function () awful.util.spawn(terminal .. " -cd /tmp/builds/reven/debug") end),
